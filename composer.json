@@ -1,0 +1,19 @@
+{
+    "name": "fpt-laptop/my_project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "faha24",
+            "email": "thanhc752@gmail.com"
+        }
+    ],
+    "require": {
+        "eftec/bladeone": "^4.15",
+        "phroute/phroute": "^2.2"
+       
+    }
+}

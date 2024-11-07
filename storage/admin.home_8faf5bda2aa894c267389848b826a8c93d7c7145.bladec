@@ -1,0 +1,22 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<div>
+<div class="xp-breadcrumbbar text-center">
+ <h4 class="page-title">Product</h4>
+ <ol class="breadcrumb">
+ <li class="breadcrumb-item"><a href="#">Admin</a></li>
+ <li class="breadcrumb-item active" aria-curent="page">Product</li>
+ </ol>
+</div>
+
+
+</div>
+</div>
+</div>
+ trang chủ admin
+</div>
+<?php $this->stopSection(); ?>
+
+
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('admin.layout.main'); } ?>

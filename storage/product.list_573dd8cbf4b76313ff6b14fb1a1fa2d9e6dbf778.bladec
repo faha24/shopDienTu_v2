@@ -1,0 +1,306 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<div class="xp-breadcrumbbar text-center">
+ <h4 class="page-title">Product</h4>
+ <ol class="breadcrumb">
+ <li class="breadcrumb-item"><a href="#">Admin</a></li>
+ <li class="breadcrumb-item active" aria-curent="page">Product</li>
+ </ol>
+</div>
+
+
+</div>
+</div>
+<!------top-navbar-end----------->
+
+
+<!------main-content-start----------->
+
+<div class="main-content">
+ <div class="row">
+ <div class="col-md-12">
+ <div class="table-wrapper">
+
+ <div class="table-title">
+ <div class="row">
+ <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+ <h2 class="ml-lg-2">Manage Products</h2>
+ </div>
+ <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+ <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+ <i class="material-icons">&#xE147;</i>
+ <span>Add New Products</span>
+ </a>
+ <a href="index.php?mode=admin&act=trash_pr" class="btn btn-danger" data-toggle="">
+ <i class="material-icons">&#xE15C;</i>
+ <span>trash</span>
+ </a>
+ </div>
+ </div>
+ </div>
+
+ <table class="table table-striped table-hover">
+ <thead>
+ <tr>
+ <th>
+ <!-- <span class="custom-checkbox">
+ <input type="checkbox" id="selectAll">
+ <label for="selectAll"></label> -->
+ </th>
+ <th>id</th>
+ <th>product_name</th>
+ <th>price</th>
+ <th>category_id</th>
+ <th>View</th>
+ <th>product_des</th>
+ <th>stock</th>
+ </tr>
+ </thead>
+
+ <tbody class="list">
+ 
+ <?php $__currentLoopData = $product; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($key['status'] == 1): ?>
+ <tr>
+ <th></th>
+ <th><?php echo \htmlentities($key['id']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+ <th><?php echo \htmlentities($key['product_name']??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ <?php if($key['Detail_status'] == 0): ?>
+ <a href="<?php echo \htmlentities(route('index.php?mode=admin&act=Detail_pr&id=' . $key['id'])??'', ENT_QUOTES, 'UTF-8', false); ?>" class="edit" data-toggle="modal">
+ <i class="material-icons" data-toggle="tooltip" title="variant">loupe</i>
+ </a>
+ <?php endif; ?>
+ </th>
+ <th><?php echo \htmlentities($key['price']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+ <th><?php echo \htmlentities($key['category_id']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+ <th><?php echo \htmlentities($key['View']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+ <th><?php echo \htmlentities($key['product_des']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+ <th><?php echo \htmlentities($key['stock']??'', ENT_QUOTES, 'UTF-8', false); ?></th>
+
+ <th>
+ <a onclick="get_pr_edit('')" href="#editEmployeeModal" class="edit" data-toggle="modal">
+ <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+ </a>
+ <a onclick="return confirm('chắc chưa')" href="<?php echo \htmlentities(route('index.php?mode=admin&act=delete_pr&id=' . $key['id'])??'', ENT_QUOTES, 'UTF-8', false); ?>" class="delete" data-toggle="modal">
+ <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+ </a>
+ </th>
+ </tr>
+ <?php endif; ?>
+<?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+
+
+ </tbody>
+
+
+ </table>
+
+ <div class="clearfix">
+ <div class="hint-text">showing <b>5</b> out of <b>25</b></div>
+ <ul class="pagination">
+ <li class="page-item disabled"><a href="#">Previous</a></li>
+ <li class="page-item "><a href="#" class="page-link">1</a></li>
+ <li class="page-item "><a href="#" class="page-link">2</a></li>
+ <li class="page-item active"><a href="#" class="page-link">3</a></li>
+ <li class="page-item "><a href="#" class="page-link">4</a></li>
+ <li class="page-item "><a href="#" class="page-link">5</a></li>
+ <li class="page-item "><a href="#" class="page-link">Next</a></li>
+ </ul>
+ </div>
+
+
+
+
+
+
+
+
+
+ </div>
+ </div>
+
+
+ <!----add-modal start--------->
+ <div class="modal fade" tabindex="-1" id="addEmployeeModal" role="dialog">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h5 class="modal-title">Thêm Sản Phẩm</h5>
+ <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ <span aria-hidden="true">&times;</span>
+ </button>
+ </div>
+ <form action="index.php?mode=admin&act=add_pr" method="POST" enctype="multipart/form-data">
+ <div class="modal-body">
+
+ <div class="form-group">
+ <label>tên sản phẩm </label>
+ <input type="text" class="form-control" required name="product_name">
+ </div>
+ <div class="form-group">
+ <label>Giá sản phẩm</label>
+ <input type="number" class="form-control" required name="product_price">
+ </div>
+ <div class="form-group">
+ <label>Mô tả sản phẩm</label>
+ <textarea class="form-control" name="product_des" required></textarea>
+ </div>
+ <div class="form-group">
+ <label>số lượng</label>
+ <input type="number" class="form-control" required name="product_quantity">
+ </div>
+ <div class="form-group">
+ <label>ảnh Đại diện sản phẩm</label>
+ <input type="file" class="form-control" name="img">
+ </div>
+ <div class="form-group">
+ <label>ảnh mô tả</label>
+ <input type="file" class="form-control" name="images[]" multiple="multiple">
+ </div>
+ <div class="form-group">
+ <label>biến thể</label><br>
+ <input type="radio" class="" required name="Details" value="0">có <br>
+ <input type="radio" class="" required name="Details" value="1">không
+ </div>
+
+ <div class="form-group">
+ <label>loại sản phẩm </label>
+ <select name="category_id" id="">
+ <?php foreach ($data['categories'] as $list) { ?>
+ <option value="<?= $list['id'] ?>"><?= $list['category_name'] ?></option>
+ <?php } ?>
+ </select>
+ </div>
+
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+ <button type="submit" class="btn btn-success">Add</button>
+ </div>
+ </form>
+
+ </div>
+ </div>
+ </div>
+
+ <!----edit-modal end--------->
+
+
+
+
+
+ <!----edit-modal start--------->
+ <div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h5 class="modal-title">Edit Employees</h5>
+ <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ <span aria-hidden="true">&times;</span>
+ </button>
+ </div>
+ <form action="index.php?mode=admin&act=edit_pr" method="POST" enctype="multipart/form-data">
+ <div class="modal-body">
+ <div class="form-group" hidden>
+ <label>tên sản phẩm </label>
+ <input type="text" class="form-control" name="id" id="id_pr">
+ </div>
+ <div class="form-group">
+ <label>tên sản phẩm </label>
+ <input type="text" class="form-control" required name="product_name" id="product_name">
+ </div>
+ <div class="form-group">
+ <label>Giá sản phẩm</label>
+ <input type="number" class="form-control" required name="product_price" id="product_price">
+ </div>
+ <div class="form-group">
+ <label>Mô tả sản phẩm</label>
+ <textarea class="form-control" name="product_des" required id="product_des"></textarea>
+ </div>
+ <div class="form-group">
+ <label>số lượng</label>
+ <input type="number" class="form-control" required name="product_quantity" id="product_quantity">
+ </div>
+ <div class="form-group">
+ <label>ảnh Đại diện sản phẩm</label>
+ <input type="file" class="form-control" name="img">
+ </div>
+ <div class="form-group">
+ <label>ảnh mô tả</label>
+ <input type="file" class="form-control" name="images[]" multiple="multiple">
+ </div>
+
+ <div class="form-group">
+ <label>loại sản phẩm </label>
+ <select name="category_id" id="cate_id">
+ <?php foreach ($data['categories'] as $list) { ?>
+ <option value="<?= $list['id'] ?>"><?= $list['category_name'] ?></option>
+ <?php } ?>
+ </select>
+ </div>
+
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+ <button type="submit" class="btn btn-success">Add</button>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+
+ <!----edit-modal end--------->
+
+
+ <!----delete-modal start--------->
+ <div class="modal fade" tabindex="-1" id="deleteEmployeeModal" role="dialog">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h5 class="modal-title">Delete Employees</h5>
+ <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ <span aria-hidden="true">&times;</span>
+ </button>
+ </div>
+ <div class="modal-body">
+ <p>Are you sure you want to delete this Records</p>
+ <p class="text-warning"><small>this action Cannot be Undone,</small></p>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+ <button type="submit" class="btn btn-success">delete</a></button>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!----edit-modal end--------->
+
+
+
+
+ </div>
+</div>
+
+<!------main-content-end----------->
+
+
+
+<!----footer-design------------->
+
+<footer class="footer">
+ <div class="container-fluid">
+ <div class="footer-in">
+ <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
+ </div>
+ </div>
+</footer>
+<?php $this->stopSection(); ?>
+
+
+
+</div>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('admin.layout.main'); } ?>
