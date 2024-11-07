@@ -68,15 +68,19 @@ class DetailController extends BaseController
             $price = $_POST['price'];
 
             $color_id = $_POST['color_id'];
+            
 
             $data = array(
                 'product_id' => $pr_id,
                 'quantity' => $quantity,
                 'price' => $price,
-
                 'color_id' => $color_id,
 
             );
+            $errnor =  $this->validateProductData($data);
+            if(count($errnor) > 0){
+                flash('errors_add_detail',$errnor ,"admin/products/detail?pr_id=$pr_id");
+            }
             $this->detailModel->insertTable($data);
 
 
@@ -124,36 +128,25 @@ class DetailController extends BaseController
 
         return $pages;
     }
-    // private function validateProductData($data) {
-    //         $errors = [];
-
-    //         // Kiểm tra product_name
-    //         if (empty($data['product_name'])) {
-    //             $errors['product_name'] = 'Tên sản phẩm không được để trống';
-    //         } elseif (strlen($data['product_name']) > 100) {
-    //             $errors['product_name'] = 'Tên sản phẩm không được dài quá 100 ký tự';
-    //         }
-
-    //         // Kiểm tra price
-    //         if (!isset($data['price']) || !is_numeric($data['price']) || $data['price'] <= 0) {
-    //             $errors['price'] = 'Giá sản phẩm phải là số và lớn hơn 0';
-    //         }
-    //         if (empty($data['price'])) {
-    //             $errors['price'] = 'giá sản phẩm không được để trống';
-    //         }
-    //         // Kiểm tra product_des
-    //         if (empty($data['product_des'])) {
-    //             $errors['product_des'] = 'Mô tả sản phẩm không được để trống';
-    //         }
-
-    //         // Kiểm tra stock
-    //         if (!isset($data['stock']) || !is_numeric($data['stock']) || $data['stock'] < 0) {
-    //             $errors['stock'] = 'Số lượng sản phẩm phải là số nguyên không âm';
-    //         }
-    //         if (empty($data['stock'])) {
-    //             $errors['stock'] = 'giá sản phẩm không được để trống';
-    //         }
-
-    //         return $errors;
-    //     }
+    private function validateProductData($data) {
+        $errors = [];
+    
+        // Kiểm tra quantity
+        if (!isset($data['quantity']) || !is_numeric($data['quantity']) || $data['quantity'] <= 0) {
+            $errors['quantity'] = 'Số lượng sản phẩm phải là số và lớn hơn 0';
+        } elseif (empty($data['quantity'])) {
+            $errors['quantity'] = 'Số lượng sản phẩm không được để trống';
+        }
+    
+        // Kiểm tra price
+        if (!isset($data['price']) || !is_numeric($data['price']) || $data['price'] <= 0) {
+            $errors['price'] = 'Giá sản phẩm phải là số và lớn hơn 0';
+        } elseif (empty($data['price'])) {
+            $errors['price'] = 'Giá sản phẩm không được để trống';
+        }
+    
+        // Kiểm tra color_id
+       
+        return $errors;
+    }
 }

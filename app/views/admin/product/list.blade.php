@@ -487,7 +487,7 @@ unset($_SESSION['errors_edit_id'])
         console.error('Fetch error:', error);
       });
   }
-
+  
   function setSelectedCategory(categoryId) {
     const options = document.querySelectorAll('select[name="category_id"] option');
     console.log(options);

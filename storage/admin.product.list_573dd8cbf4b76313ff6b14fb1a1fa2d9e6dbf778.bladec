@@ -491,7 +491,13 @@ unset($_SESSION['errors_edit_id'])
  console.error('Fetch error:', error);
  });
  }
-
+ function reset (){
+ $('#id_pr').val('');
+ $('#product_name').val('');
+ $('#product_price').val('');
+ $('#product_des').val('');
+ $('#product_quantity').val('');
+ }
  function setSelectedCategory(categoryId) {
  const options = document.querySelectorAll('select[name="category_id"] option');
  console.log(options);

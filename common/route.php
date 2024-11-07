@@ -2,7 +2,7 @@
 
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\DetailController;
-use App\Controllers\CategoryController;
+use App\Controllers\Admin\CategoryController;
 use App\Controllers\Admin\ProductController;
 use App\Models\Product;
 use Phroute\Phroute\RouteCollector;
@@ -28,8 +28,9 @@ $router->get('login', function () {
     return "trang chủ";
 });
 $router->group(['prefix' => 'admin'], function ($router) {
-    $router->get('',[DashboardController::class ,'index']);
+    $router->get('', [DashboardController::class, 'index']);
     $router->group(['prefix' => 'products'], function ($router) {
+
         $router->get('', [ProductController::class, 'index']);
         $router->get('listTrash', [ProductController::class, 'listTrash']);
         $router->post('create', [ProductController::class, 'create']);
@@ -42,13 +43,21 @@ $router->group(['prefix' => 'admin'], function ($router) {
             $router->post('create', [DetailController::class, 'create']);
             $router->get('destroy/{id}', [DetailController::class, 'destroy']);
         });
+        
     });
- 
-
+    $router->group(['prefix' => 'categories'], function ($router) {
+        
+        $router->get('', [CategoryController::class, 'index']);
+        $router->post('create', [CategoryController::class, 'create']);
+        $router->post('update', [CategoryController::class, 'update']);
+        $router->get('destroy/{id}', [CategoryController::class, 'destroy']);
+        
+    });
 });
 $router->group(['prefix' => 'api'], function ($router) {
 
     $router->get('{id}/getPr', [ProductController::class, 'get']);
+    $router->get('{id}/getCate', [CategoryController::class, 'get']);
 });
 
 

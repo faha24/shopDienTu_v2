@@ -75,7 +75,7 @@ class ProductController extends BaseController implements ICrud
             );
             $errnor =  $this->validateProductData($data);
             if(count($errnor) > 0){
-                flash('errors_add',$errnor ,"admin/products?page=$page");
+                flash('errors_add',$errnor ,"admin/products");
             }
             $id = $this->productModel->insertTable($data);
             $dataImg = array(

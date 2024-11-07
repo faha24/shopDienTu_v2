@@ -66,7 +66,7 @@
 		  <i class="material-icons">category</i>Category
 		  </a>
 		  <ul class="collapse list-unstyled menu" id="homeSubmenu2">
-		  <li><a href="index.php?mode=admin&act=category">Category</a></li>
+		  <li><a href="{{route('admin/categories')}}">Category</a></li>
 			
 		  </ul>
 		  </li>
